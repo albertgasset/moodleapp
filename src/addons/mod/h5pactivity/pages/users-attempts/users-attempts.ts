@@ -42,6 +42,7 @@ export class AddonModH5PActivityUsersAttemptsPage implements OnInit {
     cmId!: number;
     h5pActivity?: AddonModH5PActivityData;
     users: AddonModH5PActivityUserAttemptsFormatted[] = [];
+    totalAttemps?: number;
     fetchMoreUsersFailed = false;
     canLoadMore = false;
 
@@ -145,6 +146,7 @@ export class AddonModH5PActivityUsersAttemptsPage implements OnInit {
             this.users = this.users.concat(formattedUsers);
         }
 
+        this.totalAttemps = result.totalAttemps;
         this.canLoadMore = result.canLoadMore;
         this.page++;
     }
