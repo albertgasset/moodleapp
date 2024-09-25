@@ -1,0 +1,5 @@
+<div class="core-editor-tiny-editor-container">
+    @if (initOptions) {
+    <editor [init]="initOptions" [initialValue]="originalContent" (onChange)="onChange" />
+    }
+</div>

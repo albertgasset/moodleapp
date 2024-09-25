@@ -11,6 +11,7 @@
     "p": "Paragraph",
     "strikethrough": "Strikethrough",
     "textrecovered": "A draft version of this text was automatically restored.",
+    "tiny": "TinyMCE editor",
     "toggle": "Toggle editor",
     "underline": "Underline",
     "unorderedlist": "Bulleted List"

@@ -148,3 +148,8 @@ export function safeNumber(value?: unknown): SafeNumber | undefined {
 
     return value;
 }
+
+/**
+ * Type representing an object with no properties.
+ */
+export type EmptyObject = Record<string, never>;

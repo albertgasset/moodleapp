@@ -1,0 +1,8 @@
+:host .core-editor-tiny-editor-container ::ng-deep {
+    // Fix minimum button size breaking Tiny styles.
+    // TODO: proper styling for the app.
+    button, [role=button] {
+        min-height: auto;
+        min-width: auto;
+    }
+}

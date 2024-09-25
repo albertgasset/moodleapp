@@ -12,11 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { NgModule, Type } from '@angular/core';
+import { APP_INITIALIZER, NgModule, Type } from '@angular/core';
 
 import { CORE_SITE_SCHEMAS } from '@services/sites';
 import { CoreEditorComponentsModule } from './components/components.module';
 import { SITE_SCHEMA } from './services/database/editor';
+import { CoreEditorTinyDemoPage } from './pages/tiny-demo/tiny-demo';
+import { Routes } from '@angular/router';
+import { CoreSharedModule } from '@/core/shared.module';
+import { CoreMainMenuDelegate } from '@features/mainmenu/services/mainmenu-delegate';
+import { CoreEditorTinyDemoMainMenuHandler } from './services/handlers/mainmenu';
+import { CoreMainMenuRoutingModule } from '@features/mainmenu/mainmenu-routing.module';
+import { CoreMainMenuTabRoutingModule } from '@features/mainmenu/mainmenu-tab-routing.module';
 
 /**
  * Get editor services.
@@ -31,9 +38,20 @@ export async function getEditorServices(): Promise<Type<unknown>[]> {
     ];
 }
 
+const mainMenuChildrenRoutes: Routes = [
+    {
+        path: 'tiny-demo',
+        pathMatch: 'full',
+        component: CoreEditorTinyDemoPage,
+    },
+];
+
 @NgModule({
     imports: [
         CoreEditorComponentsModule,
+        CoreSharedModule,
+        CoreMainMenuTabRoutingModule.forChild(mainMenuChildrenRoutes),
+        CoreMainMenuRoutingModule.forChild({ children: mainMenuChildrenRoutes }),
     ],
     providers: [
         {
@@ -41,6 +59,16 @@ export async function getEditorServices(): Promise<Type<unknown>[]> {
             useValue: [SITE_SCHEMA],
             multi: true,
         },
+        {
+            provide: APP_INITIALIZER,
+            multi: true,
+            useValue: async () => {
+                CoreMainMenuDelegate.registerHandler(CoreEditorTinyDemoMainMenuHandler.instance);
+            },
+        },
+    ],
+    declarations: [
+        CoreEditorTinyDemoPage,
     ],
 })
 export class CoreEditorModule {}

@@ -16,16 +16,21 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { CoreEditorRichTextEditorComponent } from './rich-text-editor/rich-text-editor';
 import { CoreSharedModule } from '@/core/shared.module';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { CoreEditorTinyEditorComponent } from './tiny-editor/tiny-editor';
 
 @NgModule({
     declarations: [
         CoreEditorRichTextEditorComponent,
+        CoreEditorTinyEditorComponent,
     ],
     imports: [
         CoreSharedModule,
+        EditorModule,
     ],
     exports: [
         CoreEditorRichTextEditorComponent,
+        CoreEditorTinyEditorComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
