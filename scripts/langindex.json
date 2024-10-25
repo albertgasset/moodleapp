@@ -649,6 +649,7 @@
   "addon.mod_forum.advanced": "moodle",
   "addon.mod_forum.cannotadddiscussion": "forum",
   "addon.mod_forum.cannotadddiscussionall": "forum",
+  "addon.mod_forum.cannotadddiscussiongroup": "forum",
   "addon.mod_forum.cannotcreatediscussion": "forum",
   "addon.mod_forum.couldnotadd": "forum",
   "addon.mod_forum.couldnotupdate": "forum",

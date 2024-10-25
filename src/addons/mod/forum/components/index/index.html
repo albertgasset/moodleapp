@@ -57,12 +57,20 @@
         </ion-card>
 
         <!-- Cannot add discussion to group messages. -->
-        <ion-card class="core-info-card" *ngIf="usesGroups && canAddDiscussion && !canAddDiscussionToGroup">
+        <ion-card class="core-warning-card" *ngIf="usesGroups && forum?.type !== 'single' && !canAddDiscussionToGroup &&
+                !groupInfo?.canAccessAllGroups && (!groupId || !isGroupMember)">
             <ion-item>
-                <ion-icon name="fas-circle-info" slot="start" aria-hidden="true" />
+                <ion-icon name="fas-triangle-exclamation" slot="start" aria-hidden="true" />
                 <ion-label>
-                    <span *ngIf="groupId <= 0">{{ 'addon.mod_forum.cannotadddiscussionall' | translate }}</span>
-                    <span *ngIf="groupId > 0">{{ 'addon.mod_forum.cannotadddiscussion' | translate }}</span>
+                    <span *ngIf="!userHasGroups">
+                        {{ 'addon.mod_forum.cannotadddiscussiongroup' | translate }}
+                    </span>
+                    <span *ngIf="userHasGroups && !groupId">
+                        {{ 'addon.mod_forum.cannotadddiscussionall' | translate }}
+                    </span>
+                    <span *ngIf="userHasGroups && groupId > 0 && !isGroupMember">
+                        {{ 'addon.mod_forum.cannotadddiscussion' | translate }}
+                    </span>
                 </ion-label>
             </ion-item>
         </ion-card>

@@ -152,6 +152,14 @@ export class AddonModForumIndexComponent extends CoreCourseModuleMainActivityCom
         return !!(this.discussions?.getSource().usesGroups);
     }
 
+    get userHasGroups(): boolean {
+        return (this.discussions?.getSource().userGroups?.length ?? 0) > 0;
+    }
+
+    get isGroupMember(): boolean {
+        return !!this.discussions?.getSource().userGroups?.some(group => group.id === this.groupId);
+    }
+
     get canPin(): boolean {
         return !!(this.isSetPinAvailable && this.discussions?.getSource().allPartsPermissions?.canpindiscussions);
     }

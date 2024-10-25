@@ -15,7 +15,7 @@
 import { Params } from '@angular/router';
 import { CoreRoutedItemsManagerSource } from '@classes/items-management/routed-items-manager-source';
 import { CoreUser } from '@features/user/services/user';
-import { CoreGroupInfo, CoreGroups } from '@services/groups';
+import { CoreGroup, CoreGroupInfo, CoreGroups } from '@services/groups';
 import { CoreUtils } from '@services/utils/utils';
 import {
     AddonModForum,
@@ -43,6 +43,7 @@ export class AddonModForumDiscussionsSource extends CoreRoutedItemsManagerSource
     selectedSortOrder: AddonModForumSortOrder | null = null;
     groupId = 0;
     groupInfo?: CoreGroupInfo;
+    userGroups: CoreGroup[] = [];
     allPartsPermissions?: AddonModForumCanAddDiscussion;
     canAddDiscussionToGroup = true;
     errorLoadingDiscussions = false;
@@ -159,6 +160,14 @@ export class AddonModForumDiscussionsSource extends CoreRoutedItemsManagerSource
             CoreGroups.getActivityGroupInfo(this.CM_ID, false),
             CoreUtils.ignoreErrors(AddonModForum.canAddDiscussionToAll(forumId, { cmId: this.CM_ID })),
         ]);
+
+        if (this.groupInfo.groups.length) {
+            const groups = await CoreGroups.getUserGroupsInCourse(this.COURSE_ID);
+
+            // Filter user groups that are not used in the activity.
+            const activityGroupIds = new Set(this.groupInfo.groups.map(group => group.id));
+            this.userGroups = groups.filter(group => activityGroupIds.has(group.id));
+        }
 
         this.supportsChangeGroup = AddonModForum.isGetDiscussionPostsAvailable();
         this.usesGroups = !!(this.groupInfo.separateGroups || this.groupInfo.visibleGroups);
@@ -335,6 +344,7 @@ export class AddonModForumDiscussionsSource extends CoreRoutedItemsManagerSource
         const promises: Promise<void>[] = [];
 
         promises.push(AddonModForum.invalidateForumData(this.COURSE_ID));
+        promises.push(CoreGroups.invalidateUserGroupsInCourse(this.COURSE_ID));
 
         if (this.forum) {
             promises.push(AddonModForum.invalidateDiscussionsList(this.forum.id));

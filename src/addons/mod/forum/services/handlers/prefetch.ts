@@ -250,6 +250,9 @@ export class AddonModForumPrefetchHandlerService extends CoreCourseActivityPrefe
         // Prefetch access information.
         promises.push(AddonModForum.getAccessInformation(forum.id, modOptions));
 
+        // Prefetch user groups.
+        promises.push(CoreGroups.getUserGroupsInCourse(courseId, siteId));
+
         // Get course data, needed to determine upload max size if it's configured to be course limit.
         promises.push(CoreUtils.ignoreErrors(CoreCourses.getCourseByField('id', courseId, siteId)));
 
