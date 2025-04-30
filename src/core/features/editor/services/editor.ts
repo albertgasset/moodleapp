@@ -23,6 +23,15 @@ import { CoreEditorBaseComponent } from '@features/editor/classes/base-editor-co
 export class CoreEditorServiceProvider {
 
     /**
+     * Returns the component to include in the about page of the app settings.
+     *
+     * @returns Promise that resolves with the component class or undefined.
+     */
+    async getAboutComponentClass(): Promise<Type<unknown> | undefined> {
+      return undefined;
+  }
+
+    /**
      * Returns the component of the editor implementation.
      *
      * @returns Promise that resolves with the component class.
