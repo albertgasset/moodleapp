@@ -1,0 +1,7 @@
+:host {
+    display: contents;
+
+    & > editor {
+        flex-grow: 1;
+    }
+}

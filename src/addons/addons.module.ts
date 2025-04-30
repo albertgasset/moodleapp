@@ -34,6 +34,7 @@ import { AddonRemoteThemesModule } from './remotethemes/remotethemes.module';
 import { AddonReportModule } from './report/report.module';
 import { AddonStorageManagerModule } from './storagemanager/storagemanager.module';
 import { AddonUserProfileFieldModule } from './userprofilefield/userprofilefield.module';
+import { AddonTinyMceModule } from './tinymce/tinymce.module';
 
 @NgModule({
     imports: [
@@ -57,6 +58,7 @@ import { AddonUserProfileFieldModule } from './userprofilefield/userprofilefield
         AddonReportModule,
         AddonStorageManagerModule,
         AddonUserProfileFieldModule,
+        AddonTinyMceModule,
     ],
 })
 export class AddonsModule {}

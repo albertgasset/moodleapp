@@ -1,0 +1,86 @@
+/**
+ * TinyMCE modifications.
+ **/
+
+/* Prefix all selectors with "body", otherwise TinyMCE CSS will override these rules. */
+body {
+    /* Border of focused edit area. */
+    .tox .tox-edit-area::before {
+        border: 2px solid var(--dark);
+    }
+
+    /* Match the border radious to the edit area. */
+    .tox-tinymce {
+        border-radius: 4px;
+    }
+
+    /* Reduce height of the toolbar. */
+    .tox:not(.tox-tinymce-inline) .tox-editor-header {
+        padding: 0;
+    }
+
+    /* Remove weird toolbar background in tablet mode. */
+    .tox .tox-toolbar, .tox .tox-toolbar__overflow, .tox .tox-toolbar__primary {
+        background-image: none;
+    }
+
+    /* Increase size of menu items. */
+    .tox-collection__item {
+        box-sizing: border-box;
+        min-height: var(--a11y-sizing-minTargetSize);
+    }
+
+    /* Color of toolbar buttons. */
+    .tox .tox-tbtn--active,
+    .tox .tox-tbtn--enabled,
+    .tox .tox-tbtn--enabled:focus,
+    .tox .tox-tbtn--enabled:hover,
+    .tox .tox-tbtn:active,
+    .tox .tox-mbtn--active,
+    .tox .tox-mbtn:not(:disabled).tox-mbtn--active:focus {
+        background-color: var(--primary-tint);
+    }
+
+    /* Remove background of active menu items. */
+    .tox .tox-collection--list .tox-collection__item--active:not(.tox-collection__item--state-disabled) {
+        background-color: transparent;
+        color: inherit;
+    }
+
+    /* Color of dialog primary button. */
+    .tox .tox-button:not(.tox-button--secondary, .tox-button--naked) {
+        color: var(--ion-text-color);
+        background-color: var(--primary);
+        border-color: var(--primary);
+    }
+
+    /* Border of focused textarea. */
+    .tox .tox-textarea-wrap:focus-within,
+    .tox .tox-textarea:focus {
+        border: 2px solid var(--dark);
+        box-shadow: none;
+    }
+
+    /* Hacks for full screen. */
+    &.tox-fullscreen {
+        ion-header,
+        ion-tab-bar,
+        core-split-view > ion-content {
+            display: none !important;
+        }
+        ion-item::part(native) {
+           z-index: initial !important;
+        }
+        * {
+            contain: none;
+        }
+    }
+
+    /* Ionic icons in toolbar and menu. */
+    .tox .tox-icon > ion-icon,
+    .tox .tox-collection__item-icon > ion-icon {
+        display: block;
+        width: 24px;
+        height: 24px;
+    }
+}

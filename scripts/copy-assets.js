@@ -37,4 +37,6 @@ module.exports = function(ctx) {
     for (const src in ASSETS) {
         fse.copySync(ctx.project.dir + src, assetsPath + ASSETS[src], { overwrite: true });
     }
+
+    require("../src/addons/tinymce/scripts/copy-assets")(ctx);
 };
