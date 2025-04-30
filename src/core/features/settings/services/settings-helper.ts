@@ -462,6 +462,15 @@ export class CoreSettingsHelperProvider {
     }
 
     /**
+     * Check if the dark mode is enabled.
+     *
+     * @returns True if the dark mode is enabled, false otherwise.
+     */
+    isDarkModeEnabled(): boolean {
+        return CoreHTMLClasses.hasModeClass('dark');
+    }
+
+    /**
      * Toggles dark mode based on enabled boolean.
      *
      * @param enable True to enable dark mode, false to disable.
