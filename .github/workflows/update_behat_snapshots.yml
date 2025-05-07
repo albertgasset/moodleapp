@@ -235,6 +235,7 @@ jobs:
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
         with:
+          token: ${{ secrets.GIT_TOKEN }}
           path: app
           add-paths: "*.png"
           commit-message: "[auto-generated] Update Behat snapshots"
