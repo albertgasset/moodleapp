@@ -54,6 +54,8 @@ class behat_app extends behat_app_helper {
      * @BeforeScenario @app
      */
     public function before_scenario(ScenarioScope $scope) {
+        global $DB;
+
         $feature = $scope->getFeature();
 
         $steps = $scope->getScenario()->getSteps();
@@ -66,6 +68,10 @@ class behat_app extends behat_app_helper {
         // By default, enable deep link logins in the app for Behat tests since some steps rely on this.
         // Specific scenarios can change this value to verify that the feature works as expected.
         set_config('enabledeeplinkautologin', 1, 'tool_mobile');
+
+        // Behat does not use a consistent starting point for auto-increment IDs, sogenerated course images can be different between runs.
+        // Reset the course sequence to ensure consistent auto-increment IDs.
+        $DB->get_manager()->reset_sequence('course');
     }
 
     /**
